@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Board from "./Board";
+import PreviousButton from "./PreviousButton";
 
 export default function Game() {
     // state that stores the next player
@@ -13,16 +14,59 @@ export default function Game() {
 
     function jumpTo(i){
         console.log(i);
-        setXIsNext(i % 2 === 0);
-        setHistory([...history.slice(0,i+1)]);
-        setCurrentMove(i);
+        setXIsNext(i % 2 !== 0);
+        setHistory([...history.slice(0, i)]);
+    }
+
+    function determineWinner(squares){
+      const lines = [
+        [0,1,2],
+        [3,4,5],
+        [6,7,8],
+        [0,3,6],
+        [1,4,7],
+        [2,5,8],
+        [0,4,8],
+        [2,4,6]
+      ];
+      // loop over the squares and check if any of the winning lines has same value not null 
+      for(let i=0; i<lines.length; i++){
+        const [a, b, c] = lines[i];
+        if(squares[a] && squares[a] === squares[b] && squares[b] === squares[c]){
+          return squares[a];
+        }
+      }
+      return null;
+    }
+
+    function hasGameFinished(squares){
+      for(let i=0; i<squares.length ; i++){
+        if(!squares[i]){
+          return false;
+        }else{
+          continue;
+        }
+      }
+      return true;
+    }
+
+    let gameHasFinished = hasGameFinished(currentSquares);
+    let status = 'next Player is ' + (xIsNext ? 'X' : 'O');
+    let winner = determineWinner(currentSquares);
+    if(winner){
+      console.log('the wineeer is ' + winner);
+      status = 'Game Over, the winner is the Player ' + winner;
+    }
+    if(gameHasFinished && !winner){
+      console.log('game end, no winner');
+      status = 'Game Over, No Winner :(';
     }
 
     function handlePlay(squares){
-        setHistory([...history, squares]);
-        setXIsNext(!xIsNext);
+      setHistory([...history, squares]);
+      setXIsNext(!xIsNext);
     }
-    const moves = history.map((squares, move) => {
+    /*const moves = history.map((squares, move) => {
         console.log(move);
         console.log(squares);
         let description;
@@ -37,10 +81,19 @@ export default function Game() {
                 <button key={move} onClick={() => jumpTo(move)}>{description}</button>
             </li>
         );
-    })
+    })*/
+
+
+    function resetBoard(){
+      setHistory([Array(9).fill(null)]);
+      setXIsNext(true);
+      setCurrentMove(0);
+    }
+
     
     return (
       <div className="game">
+        <div className="statut">{status}</div>
         <div className="game-board">
           <Board handlePlay={handlePlay} 
           currentSquares={currentSquares} 
@@ -48,9 +101,12 @@ export default function Game() {
           currentMove={currentMove}
           setCurrentMove={setCurrentMove} />
         </div>
-        <div className="game-info">
-          <ol>{moves}</ol>
-        </div>
+        {history.length > 1 && (
+          <div className="game-info">
+            <button onClick={resetBoard}>Reset</button>
+            {history.length > 1 &&  <PreviousButton jumpTo = {() => jumpTo(history.length - 1)} text={history.length - 1} /> }
+          </div>
+        )}
       </div>
     );
   }
