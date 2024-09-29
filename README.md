@@ -1,70 +1,72 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Tic-Tac-Toe Game in React
 
-## Available Scripts
+A simple Tic-Tac-Toe game built with React, allowing players to take turns, track game history, and revisit past moves. The project is Dockerized, making it easy to set up and run in a consistent environment.
 
-In the project directory, you can run:
+## 🛠 Features
+- **Interactive Game Board**: A 3x3 grid where players take turns clicking to place their 'X' or 'O'.
+- **Game Status**: Displays the current player or the winner when the game ends.
+- **Game History**: Tracks every move, allowing players to view and "jump" to previous steps of the game.
+- **Winner Determination**: Built-in logic to determine the winner of the game.
+- **Dockerized Setup**: Easily run the app in a containerized environment using Docker.
 
-### `npm start`
+## 🎮 Functionalities
+### 1. **Gameplay**
+   - A 3x3 grid that alternates between 'X' and 'O' as players click on the squares.
+   - Displays the current player’s turn and announces the winner once the game is complete.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 2. **Game History**
+   - Tracks each move in a history array, allowing users to view the sequence of moves.
+   - Players can "jump" to any previous move, letting them see the board's state at that point.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 3. **Winner Determination**
+   - Includes logic to identify a winner based on predefined winning line combinations (rows, columns, diagonals).
+   - Displays the winner when one is found, or announces the next player's turn.
 
-### `npm test`
+## 🚀 Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
+- [Docker](https://www.docker.com/get-started) installed on your machine.
+- [Node.js](https://nodejs.org/en/) if you want to run the app locally without Docker.
 
-### `npm run build`
+### Running the App with Docker
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/amineenim/TicTacToe-Game.git
+   cd TicTacToe-Game/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. **Build the Docker Image**
+   ```bash
+   docker build -t react-tictactoe-app .
+   ```
 
-### `npm run eject`
+3. **Run the Docker Container**
+   ```bash
+   docker run -p 3000:3000 react-tictactoe-app
+   ```
+   Access the app at [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Running the App Locally (Without Docker)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Install Dependencies**
+   ```bash
+   npm install
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Start the Application**
+   ```bash
+   npm start
+   ```
+   The application will run on [http://localhost:3000](http://localhost:3000).
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📝 Usage
+- **Play the Game**: Click on an empty square to make a move.
+- **View Game Status**: The status at the top displays whose turn it is or who the winner is.
+- **Game History**: Jump to any previous move by selecting an entry from the history list (if implemented in `Game.js`).
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🛠 Technologies Used
+- **React**: A JavaScript library for building user interfaces.
+- **Docker**: Containerization platform to run the application in isolated environments.
