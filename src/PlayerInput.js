@@ -14,21 +14,48 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
         console.log('player ' + playerNumber + ' is ready');
     }
 
-    function handleNameChange(name){
-        // trim the name provided
+    function validateName(name){
         const trimmedName = name.trim();
-        const regex = /^[a-zA-Z\s]*$/;
+        const regex = /^[a-zA-Z0-9\s]*$/;
+        let allErrors = errors.slice();
 
-        if(trimmedName && !regex.test(name)){
-            setErrors([...errors, 'Only charcters and spaces are allowed']);
+        if(!trimmedName){
+            setErrors([]);
+            return;
         }
-        if(trimmedName && /^[0-9\s]*$/.test(name)){
-            setErrors([...errors, 'name must have characters'])
+        if(!regex.test(name)){
+            if(!allErrors.some((error) => Object.keys(error)[0] === 'regex')){
+                allErrors = [...allErrors, {'regex' : 'Only characters and spaces are allowed'}];
+            }
+        }else{
+            // filter the errors object and remove the object with key regex
+            allErrors = allErrors.filter((errorObj) => {
+                return Object.keys(errorObj)[0] !== 'regex';
+            });
         }
-        if(trimmedName && trimmedName.length<3){
-            setErrors([...errors, 'Name must be at least 3 characters long'])
+        if(/^[0-9\s]*$/.test(name)){
+            if(!allErrors.some(error => Object.keys(error)[0] === 'numbers')){  
+                allErrors = [...allErrors, {'numbers' : 'The name can not contain numbers only, add characters'}];
+            }
+        }else{
+            allErrors = allErrors.filter((errorObj) => {
+                return Object.keys(errorObj)[0] !== 'numbers';
+            });
         }
+        if(trimmedName.length < 3){
+            if(!allErrors.some(error => Object.keys(error)[0] === 'length')){
+                allErrors = [...allErrors, {'length' : 'the name must have 3 charcters minimum'}];
+            }
+        }else{
+            allErrors = allErrors.filter((errorObj) => {
+                return Object.keys(errorObj)[0] !== 'length';
+            });
+        }
+        setErrors(allErrors);
+    }
 
+    function handleNameChange(name){
+        validateName(name);
         if(playerNumber === 1){
             setPlayersNames({...playersNames, player1: name});
             return;
@@ -43,10 +70,11 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
             onChange={(e) => handleNameChange(e.target.value)} 
             placeholder="Enter your Name here"></input>
             {
-                errors.length > 1 && (
-                    errors.map((error, index) => {
+                errors.length >= 1 && (
+                    errors.map((error) => {
+                        let keyName = Object.keys(error)[0];
                         return (
-                            <p key={index} className="error-message">{error}</p>
+                            <p key={keyName} className="error-message">{error[keyName]}</p>
                         )
                     })
                 )
