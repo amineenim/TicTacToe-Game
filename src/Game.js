@@ -2,7 +2,7 @@ import { useState } from "react";
 import Board from "./Board";
 import PreviousButton from "./PreviousButton";
 
-export default function Game() {
+function Game() {
     // state that stores the next player
     const [xIsNext, setXIsNext] = useState(true);
     // state that stores the history of the game
@@ -66,22 +66,6 @@ export default function Game() {
       setHistory([...history, squares]);
       setXIsNext(!xIsNext);
     }
-    /*const moves = history.map((squares, move) => {
-        console.log(move);
-        console.log(squares);
-        let description;
-        if(move > 0){
-            description = 'Go to move #' + move;
-        }else{
-            description = 'Go to game start'
-        }
-        console.log(description);
-        return(
-            <li>
-                <button key={move} onClick={() => jumpTo(move)}>{description}</button>
-            </li>
-        );
-    })*/
 
 
     function resetBoard(){
@@ -110,4 +94,4 @@ export default function Game() {
       </div>
     );
   }
-  
+  export default Game;
