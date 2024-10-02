@@ -20,7 +20,7 @@ export default function App(){
 
     return(
         <div>
-            { screenToDisplay === 'home' && <Home/> }
+            { screenToDisplay === 'home' && <Home setScreenToDisplay={setScreenToDisplay} /> }
             { screenToDisplay === 'players' && <Players playersNames={playersNames} setPlayersNames={setPlayersNames} />}
             { screenToDisplay === 'game' && <Game playersNames={playersNames} />}
             <button className="clickme" onClick={displayPlayersScreen} >Start The Game</button>

@@ -1,19 +1,27 @@
+import PlayerInput from "./PlayerInput";
+import './players.css';
 
-function Players({playersNames, setPlayersNames}){
-
-    function handleNameChange(name, index){
-        index === 1 ? setPlayersNames({...playersNames, player1: name}) : setPlayersNames({...playersNames, player2: name});
-    }
-    return(
-        <>
-            <h2>Please Enter your Names</h2>
-            <input type="text" className="playername-input" 
-            value={playersNames.player1} 
-            onChange={(e) => handleNameChange(e.target.value, 1)} ></input>
-            <input type="text" className="playername-input" 
-            value={playersNames.player2} 
-            onChange={(e) => handleNameChange(e.target.value, 2)} ></input>
-        </>
+function Players({ playersNames, setPlayersNames }) {
+    const defaults = {player1 : "Player 1", player2: "Player 2"};
+    return (
+        <div className="players-container">
+            <PlayerInput
+                playersNames={playersNames}
+                setPlayersNames={setPlayersNames}
+                playerNumber={1}
+            />
+            <div className="vs-container">
+                <h2>Player 1 VS Player 2</h2>
+                <button className="start-game-button" disabled>
+                    Start Game
+                </button>
+            </div>
+            <PlayerInput
+                playersNames={playersNames}
+                setPlayersNames={setPlayersNames}
+                playerNumber={2}
+            />
+        </div>
     );
 }
 

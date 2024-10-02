@@ -11,9 +11,7 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
     }, [playerNumber]);
 
     function onPlayerReady(){
-        if(playerNumber === 1){
-            
-        }
+        console.log('player ' + playerNumber + ' is ready');
     }
 
     function handleNameChange(name){
@@ -42,7 +40,8 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
         <div className="player-view">
             <input ref={inputRef} type="text" className="playername-input" 
             value={playerNumber === 1 ? playersNames.player1 : playersNames.player2 } 
-            onChange={(e) => handleNameChange(e.target.value)} ></input>
+            onChange={(e) => handleNameChange(e.target.value)} 
+            placeholder="Enter your Name here"></input>
             {
                 errors.length > 1 && (
                     errors.map((error, index) => {
@@ -54,6 +53,7 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
             }
             <h4>{playerNumber === 1 ? playersNames.player1 : playersNames.player2 }</h4>
             <button className="ready-button" onClick={onPlayerReady}>Ready</button>
+            <btton className="skip-button">Skip</btton>
         </div>
     );
 }

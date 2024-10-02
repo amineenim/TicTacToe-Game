@@ -1,0 +1,80 @@
+.players-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+    padding: 0 20px; /* Add padding to the sides */
+}
+
+.player-view {
+    width: 30%; /* Adjust width of each player panel */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #007bff;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+}
+
+.vs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+input.playername-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.error-message {
+    color: rgb(251, 68, 68);
+    font-size: 12px;
+}
+
+button.ready-button, .skip-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+button.ready-button:hover, .skip-button:hover {
+    background-color: #0056b3;
+}
+
+button.start-game-button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: not-allowed; /* Initially disabled */
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+button.start-game-button:disabled {
+    background-color: #ccc; /* Change color when disabled */
+}
+
+button.start-game-button:enabled {
+    cursor: pointer;
+}
