@@ -1,13 +1,26 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PlayerInput from "./PlayerInput";
 import './players.css';
 
 function Players({ playersNames, setPlayersNames, setScreenToDisplay }) {
     const [arePlayersReady, setArePlayersReady] = useState([false, false]);
+    let player1inputRef = useRef();
+    let player2inputRef = useRef();
 
     useEffect(() => {
-        arePlayersReady[0] && arePlayersReady[1] && setScreenToDisplay('game');
+        if(arePlayersReady[0] && arePlayersReady[1]){
+            //setScreenToDisplay('game');
+            console.log("game screen")
+            return;
+        }
+        if(!arePlayersReady[0]){
+            player1inputRef.current.focus();
+        }else{
+            player2inputRef.current.focus();
+        }
+
     }, [arePlayersReady, setScreenToDisplay]);
+
     return (
         <div className="players-container">
             <PlayerInput
@@ -16,12 +29,15 @@ function Players({ playersNames, setPlayersNames, setScreenToDisplay }) {
                 playerNumber={1}
                 arePlayersReady={arePlayersReady}
                 setArePlayersReady={setArePlayersReady}
+                playerInputRef={player1inputRef}
             />
             <div className="vs-container">
-                <h2>Player 1 VS Player 2</h2>
-                <button className="start-game-button" disabled>
-                    Start Game
-                </button>
+                {
+                    arePlayersReady[0] && arePlayersReady[1] && <h2>{playersNames.player1} VS {playersNames.player2}</h2> 
+                }
+                {
+                   (!arePlayersReady[0] || !arePlayersReady[1]) && <h2>Player1 VS Player2</h2>
+                }
             </div>
             <PlayerInput
                 playersNames={playersNames}
@@ -29,6 +45,7 @@ function Players({ playersNames, setPlayersNames, setScreenToDisplay }) {
                 playerNumber={2}
                 arePlayersReady={arePlayersReady}
                 setArePlayersReady={setArePlayersReady}
+                playerInputRef={player2inputRef}
             />
         </div>
     );

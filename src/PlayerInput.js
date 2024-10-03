@@ -1,14 +1,13 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-function PlayerInput({playerNumber, setPlayersNames, playersNames, arePlayersReady, setArePlayersReady}){
+function PlayerInput({playerNumber, setPlayersNames, playersNames, arePlayersReady, setArePlayersReady, playerInputRef}){
     const [errors, setErrors] = useState([]);
-    const inputRef = useRef();
 
     useEffect(() => {
         if(playerNumber === 1){
-            inputRef.current.focus();
+            playerInputRef && playerInputRef.current.focus();
         }
-    }, [playerNumber]);
+    }, [playerNumber, playerInputRef]);
 
     function onPlayerReady(){
         let playersReadiness = arePlayersReady.slice();
@@ -79,7 +78,7 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames, arePlayersRea
     return (
         <div className="player-view">
             <label htmlFor="playername">Votre nom/pseudo : </label>
-            <input ref={inputRef} type="text" id="playername" className="playername-input" 
+            <input ref={playerInputRef} type="text" id="playername" className="playername-input" 
             value={playerNumber === 1 ? playersNames.player1 : playersNames.player2 } 
             onChange={(e) => handleNameChange(e.target.value)} 
             placeholder={playerNumber === 1 ? 'Player1' : 'Player2' }></input>
@@ -95,7 +94,7 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames, arePlayersRea
             }
             <h4>{playerNumber === 1 ? playersNames.player1 : playersNames.player2 }</h4>
             <button className="ready-button" onClick={onPlayerReady}
-            disabled={errors.length !== 0}>Ready</button>
+            disabled={errors.length !== 0 || arePlayersReady[playerNumber - 1]}>Ready</button>
         </div>
     );
 }

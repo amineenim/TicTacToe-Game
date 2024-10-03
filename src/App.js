@@ -2,6 +2,7 @@ import { useState } from "react";
 import Home from "./Home";
 import Players from "./Players";
 import Game from "./Game";
+import './App.css';
 
 export default function App(){
 
@@ -14,16 +15,11 @@ export default function App(){
         player2 : ''
     });
 
-    function displayPlayersScreen(){
-        setScreenToDisplay('players');
-    }
-
     return(
-        <div>
+        <div className="app">
             { screenToDisplay === 'home' && <Home setScreenToDisplay={setScreenToDisplay} /> }
             { screenToDisplay === 'players' && <Players playersNames={playersNames} setPlayersNames={setPlayersNames} setScreenToDisplay={setScreenToDisplay} />}
             { screenToDisplay === 'game' && <Game playersNames={playersNames} />}
-            <button className="clickme" onClick={displayPlayersScreen} >Start The Game</button>
         </div>
     );
 }
