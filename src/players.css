@@ -78,3 +78,10 @@ button.start-game-button:disabled {
 button.start-game-button:enabled {
     cursor: pointer;
 }
+
+.ready-button:disabled {
+    background-color: #ccc; /* Gray color when disabled */
+    color: #666; /* Change text color for better contrast */
+    cursor: not-allowed; /* Change cursor to indicate it's disabled */
+    opacity: 0.6; /* Make the button slightly transparent */
+}

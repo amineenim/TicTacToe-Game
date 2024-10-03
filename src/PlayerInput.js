@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-function PlayerInput({playerNumber, setPlayersNames, playersNames}){
+function PlayerInput({playerNumber, setPlayersNames, playersNames, arePlayersReady, setArePlayersReady}){
     const [errors, setErrors] = useState([]);
     const inputRef = useRef();
 
@@ -11,7 +11,20 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
     }, [playerNumber]);
 
     function onPlayerReady(){
-        console.log('player ' + playerNumber + ' is ready');
+        let playersReadiness = arePlayersReady.slice();
+        if(playerNumber === 1){
+            // if the state is still empty set his name by default
+            if(playersNames.player1 === ''){
+                setPlayersNames({...playersNames, player1 : "Player1"});
+            }
+            playersReadiness[0] = true;
+        }else{
+            if(playersNames.player2 === ''){
+                setPlayersNames({...playersNames, player2: "Player2"});
+            }
+            playersReadiness[1] = true;
+        }
+        setArePlayersReady(playersReadiness);
     }
 
     function validateName(name){
@@ -65,10 +78,11 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
 
     return (
         <div className="player-view">
-            <input ref={inputRef} type="text" className="playername-input" 
+            <label htmlFor="playername">Votre nom/pseudo : </label>
+            <input ref={inputRef} type="text" id="playername" className="playername-input" 
             value={playerNumber === 1 ? playersNames.player1 : playersNames.player2 } 
             onChange={(e) => handleNameChange(e.target.value)} 
-            placeholder="Enter your Name here"></input>
+            placeholder={playerNumber === 1 ? 'Player1' : 'Player2' }></input>
             {
                 errors.length >= 1 && (
                     errors.map((error) => {
@@ -80,8 +94,8 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames}){
                 )
             }
             <h4>{playerNumber === 1 ? playersNames.player1 : playersNames.player2 }</h4>
-            <button className="ready-button" onClick={onPlayerReady}>Ready</button>
-            <btton className="skip-button">Skip</btton>
+            <button className="ready-button" onClick={onPlayerReady}
+            disabled={errors.length !== 0}>Ready</button>
         </div>
     );
 }
