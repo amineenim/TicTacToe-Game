@@ -11,6 +11,7 @@ function Home({setScreenToDisplay}){
             it's a simple <strong>TicTacToe Game</strong></h4>
             <button className="start-game"
             onClick={goToPlayersScreen}>Start the Game</button>
+            <p className='copyright'>copyright 2024, AMINE MAOURID</p>
         </div>
     )
 };

@@ -23,7 +23,7 @@ function Players({ playersNames, setPlayersNames, setScreenToDisplay }) {
     useEffect(() => {
         if(arePlayersReady[0] && arePlayersReady[1]){
             //setScreenToDisplay('game');
-            setCountDown(3);
+            setCountDown(10);
             console.log("game screen")
             return;
         }

@@ -72,6 +72,9 @@ function Game({playersNames}) {
     }
 
     function handlePlay(squares){
+      if(winner){
+        return;
+      }
       setHistory([...history, squares]);
       setXIsNext(!xIsNext);
     }
