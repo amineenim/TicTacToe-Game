@@ -47,7 +47,7 @@ A simple Tic-Tac-Toe game built with React, allowing players to take turns, trac
    - The interface displays player names and readiness status, with validation for input correctness.
 
 ### 3. **Invalid Input Handling**
-   ![Invalid Input Handling](screenshots/oneplayerreadyscreen.png)
+   ![Invalid Input Handling](screenshots/invalidinput.png)
    - Handles invalid input with clear error messages to guide players.
    - Highlights input errors in real-time, providing a user-friendly experience.
 
