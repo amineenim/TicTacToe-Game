@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import checkedIcon from './assets/check.svg';
 
 function PlayerInput({playerNumber, setPlayersNames, playersNames, arePlayersReady, setArePlayersReady, playerInputRef}){
     const [errors, setErrors] = useState([]);
@@ -93,6 +94,8 @@ function PlayerInput({playerNumber, setPlayersNames, playersNames, arePlayersRea
                 )
             }
             <h4>{playerNumber === 1 ? playersNames.player1 : playersNames.player2 }</h4>
+            {arePlayersReady[playerNumber - 1] && <img src={checkedIcon} 
+            height="20px" width="20px" alt="checked icon"/>}
             <button className="ready-button" onClick={onPlayerReady}
             disabled={errors.length !== 0 || arePlayersReady[playerNumber - 1]}>Ready</button>
         </div>

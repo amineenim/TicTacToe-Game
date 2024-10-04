@@ -1,8 +1,9 @@
 import { useState } from "react";
 import Board from "./Board";
 import PreviousButton from "./PreviousButton";
+import './game.css';
 
-function Game() {
+function Game({playersNames}) {
     // state that stores the next player
     const [xIsNext, setXIsNext] = useState(true);
     // state that stores the history of the game
@@ -33,10 +34,16 @@ function Game() {
       for(let i=0; i<lines.length; i++){
         const [a, b, c] = lines[i];
         if(squares[a] && squares[a] === squares[b] && squares[b] === squares[c]){
-          return squares[a];
+          return {
+            winner : squares[a],
+            winCombination : [a,b,c]
+          };
         }
       }
-      return null;
+      return {
+        winner : null,
+        winCombination : null
+      };
     }
 
     function hasGameFinished(squares){
@@ -51,11 +58,13 @@ function Game() {
     }
 
     let gameHasFinished = hasGameFinished(currentSquares);
-    let status = 'next Player is ' + (xIsNext ? 'X' : 'O');
-    let winner = determineWinner(currentSquares);
+    let status = 'next Player is ' + (xIsNext ? playersNames.player1 : playersNames.player2);
+    let {winner, winCombination} = determineWinner(currentSquares);
     if(winner){
       console.log('the wineeer is ' + winner);
-      status = 'Game Over, the winner is the Player ' + winner;
+      console.log(winCombination);
+
+      status = 'Game Over, the winner is the Player ' + (winner === 'X' ? playersNames.player1 : playersNames.player2);
     }
     if(gameHasFinished && !winner){
       console.log('game end, no winner');
@@ -76,21 +85,28 @@ function Game() {
 
     
     return (
-      <div className="game">
-        <div className="statut">{status}</div>
+      <div className="game-container">
+        <div className="statut-players">
+          <p className="game-status">{status}</p>
+          <div className="game-players">
+            <h3>{playersNames.player1}</h3>
+            {history.length > 1 && (
+              <div className="game-info">
+                <button onClick={resetBoard}>Reset</button>
+                {history.length > 1 &&  <PreviousButton jumpTo = {() => jumpTo(history.length - 1)} text={history.length - 1} /> }
+              </div>
+            )}
+            <h3>{playersNames.player2}</h3>
+          </div>
+        </div>
         <div className="game-board">
           <Board handlePlay={handlePlay} 
           currentSquares={currentSquares} 
           xIsNext={xIsNext}
           currentMove={currentMove}
-          setCurrentMove={setCurrentMove} />
+          setCurrentMove={setCurrentMove}
+          winCombination={winCombination} />
         </div>
-        {history.length > 1 && (
-          <div className="game-info">
-            <button onClick={resetBoard}>Reset</button>
-            {history.length > 1 &&  <PreviousButton jumpTo = {() => jumpTo(history.length - 1)} text={history.length - 1} /> }
-          </div>
-        )}
       </div>
     );
   }

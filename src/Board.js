@@ -1,8 +1,8 @@
-import './App.css';
 import Square from './Square';
+import './board.css';
 
-function Board({handlePlay, currentSquares, xIsNext, currentMove, setCurrentMove}) {
-
+function Board({handlePlay, currentSquares, xIsNext, currentMove, setCurrentMove, winCombination}) {
+  
   function handleClick(i){
     if(currentSquares[i]){
       return;
@@ -19,22 +19,16 @@ function Board({handlePlay, currentSquares, xIsNext, currentMove, setCurrentMove
 
 
   return (
-    <div className="App">
-      <div className='board-row'>
-        <Square value={currentSquares[0]} onSquareClick={() => handleClick(0)} />
-        <Square value={currentSquares[1]} onSquareClick={() => handleClick(1)}/>
-        <Square value={currentSquares[2]} onSquareClick={() => handleClick(2)}/>
-      </div>
-      <div className='board-row'>
-        <Square value={currentSquares[3]} onSquareClick={() => handleClick(3)}/>
-        <Square value={currentSquares[4]} onSquareClick={() => handleClick(4)}/>
-        <Square value={currentSquares[5]} onSquareClick={() => handleClick(5)}/>
-      </div>
-      <div className='board-row'>
-        <Square value={currentSquares[6]} onSquareClick={() => handleClick(6)}/>
-        <Square value={currentSquares[7]} onSquareClick={() => handleClick(7)}/>
-        <Square value={currentSquares[8]} onSquareClick={() => handleClick(8)}/>
-      </div>
+    <div className="board">
+        <Square value={currentSquares[0]} index={0} onSquareClick={() => handleClick(0)} winCombination={winCombination} />
+        <Square value={currentSquares[1]} index={1} onSquareClick={() => handleClick(1)} winCombination={winCombination} />
+        <Square value={currentSquares[2]} index={2} onSquareClick={() => handleClick(2)} winCombination={winCombination} />
+        <Square value={currentSquares[3]} index={3} onSquareClick={() => handleClick(3)} winCombination={winCombination} />
+        <Square value={currentSquares[4]} index={4} onSquareClick={() => handleClick(4)} winCombination={winCombination} />
+        <Square value={currentSquares[5]} index={5} onSquareClick={() => handleClick(5)} winCombination={winCombination} />
+        <Square value={currentSquares[6]} index={6} onSquareClick={() => handleClick(6)} winCombination={winCombination} />
+        <Square value={currentSquares[7]} index={7} onSquareClick={() => handleClick(7)} winCombination={winCombination} />
+        <Square value={currentSquares[8]} index={8} onSquareClick={() => handleClick(8)} winCombination={winCombination} />
     </div>
   );
 }

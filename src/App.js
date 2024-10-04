@@ -2,7 +2,7 @@ import { useState } from "react";
 import Home from "./Home";
 import Players from "./Players";
 import Game from "./Game";
-import './App.css';
+import './app.css';
 
 export default function App(){
 

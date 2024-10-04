@@ -1,0 +1,21 @@
+.board {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr); /* Creates three equal rows */
+    grid-template-columns: repeat(3, 1fr); /* Creates three equal columns */
+    gap: 1px; /* Spacing between squares */
+    width: 100%; /* Full width */
+    max-width: 400px; /* Maximum width to keep the board responsive */
+    aspect-ratio: 1 / 1; /* Maintain square shape */
+    margin-top: 20px;
+    padding: 4px;
+}
+
+.game-board {
+    width: 100%; /* Full width */
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+  }

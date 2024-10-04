@@ -1,0 +1,27 @@
+.msquare {
+    background-color: white; /* Default background */
+    border: 2px solid #007bff; /* Blue border */
+    font-size: 2em; /* Size of the X or O */
+    color: black; /* X or O mark color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease; /* Smooth effect */
+    width: 100%; /* Makes each square take up full space of its grid cell */
+    height: 100%; /* Makes each square take up full space of its grid cell */
+  }
+  
+  /* Hover effect on squares */
+  .msquare:hover {
+    border-color: #0056b3; /* Darker blue border on hover */
+  }
+  
+  /* Filled square styling */
+  .msquare.filled {
+    background-color: #e0f0ff; /* Light blue background when filled */
+  }
+  .msquare.win {
+    background-color: #81b9ee;
+    border-color: #43f18c /* Light blue background when filled */
+  }
